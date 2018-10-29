@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <title>Exercice 3 - partie Bonus - Angular</title>
+</head>
+<body ng-app="app">
+  <div class="container present">
+    <h1>Exercice 3 de la partie Bonus d'Angular</h1>
+    <p>Faire un formulaire avec les champs nom, e-mail, sujet et texte. Le champ texte doit être un textarea.
+       Chaque champ doit avoir son propre message d'erreur si la saisie est incorrecte.
+       Suite:
+       Ajouter un bouton envoyer. Au clic, ajouter en dessous du formulaire le sujet du mail. Au clic sur un sujet afficher une autre vue avec les autres données saisies (nom, email, sujet et texte).</p>
+  </div>
+<div class="container col-md-4">
+    <form name="exampleForm" >
+      <label>Prénom :</label><br />
+      <input type="text" name="userFirstName" ng-model="firstName" required />
+      <div  ng-messages="exampleForm.userFirstName.$error">
+        <div style="color:white ; background-color:red" ng-message="required">Champ oblogatoire</div>
+      </div>
+      <div  ng-show="exampleForm.userFirstName.$valid">
+        <div style="color:white ; background-color:green">Validé</div>
+      </div>
+
+      <label>Nom :</label><br />
+      <input type="text" name="userLastName" ng-model="lastName" required />
+      <div ng-messages="exampleForm.userLastName.$error">
+        <div style="color:white ; background-color:red" ng-message="required">Champ oblogatoire</div>
+      </div>
+      <div  ng-show="exampleForm.userLastName.$valid">
+        <div style="color:white ; background-color:green">Validé</div>
+      </div>
+
+      <label>Adresse mail :</label><br />
+      <input type="email" name="userEmail" ng-model="email" required />
+      <div ng-messages="exampleForm.userEmail.$error">
+        <div style="color:white ; background-color:red" ng-message="required">Champ oblogatoire</div>
+        <div style="color:white ; background-color:orange" ng-message="email">Mail non-valide</div>
+      </div>
+      <div  ng-show="exampleForm.userEmail.$valid">
+        <div style="color:white ; background-color:green">Validé</div>
+      </div>
+
+      <label>Sujet:</label><br />
+      <input type="text" name="userSujet" ng-model="sujet" required />
+      <div ng-messages="exampleForm.userSujet.$error">
+        <div style="color:white ; background-color:red" ng-message="required">Champ oblogatoire</div>
+      </div>
+      <div  ng-show="exampleForm.userSujet.$valid">
+        <div style="color:white ; background-color:green">Validé</div>
+      </div>
+
+      <label>Champ texte:</label><br />
+      <textarea type="text" name="userMessage" class="form-control" rows="8" ng-model="message" ng-minlength="10" ng-maxlength="500" required></textarea>
+      <div ng-messages="exampleForm.userMessage.$error">
+        <div style="color:white ; background-color:red" ng-message="required">Champ oblogatoire</div>
+        <div style="color:white ; background-color:orange" ng-message="minlength">Message devant dépasser les 10 caractères</div>
+        <div style="color:white ; background-color:orange" ng-message="maxlength">Message ne pouvant dépasser les 500 caractères</div>
+      </div>
+      <div  ng-show="exampleForm.userMessage.$valid">
+        <div style="color:white ; background-color:green">Validé</div>
+      </div>
+
+      <button type="button" name="button"  ng-click="showme=true">Envoyer</button>
+      <div><a href="" ng-show="showme" ng-click="showme2=true">{{sujet}}</a></div>
+      <div class="final" ng-show="showme2">
+      <p >{{firstName}} {{lastName}} (mail : {{email}}) aborde le sujet <b>{{sujet}}</b> de cette manière : {{message}}</p>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-messages.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('app', ['ngMessages']);
+  </script>
+  
+</body>
+</html>
